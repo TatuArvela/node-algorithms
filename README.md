@@ -1,2 +1,3 @@
-# node-al-gore-rhythms
+# node-algorithms
+
 Studying search and sort algorithms in Node.js
