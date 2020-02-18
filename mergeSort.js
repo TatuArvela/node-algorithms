@@ -1,14 +1,10 @@
 function sort1(left, right) {
   const arr = [];
-  /*
-    Using indexes is faster than shifting arrays
-  */
+  // Using indexes is faster than shifting arrays
   let leftIndex = 0;
   let rightIndex = 0;
 
-  /*
-    Sort elements into result array
-  */
+  // Sort elements into result array
   while (leftIndex < left.length && rightIndex < right.length) {
     if (left[leftIndex] < right[rightIndex]) {
       arr.push(left[leftIndex]);
@@ -19,26 +15,20 @@ function sort1(left, right) {
     }
   }
 
-  /*
-    Add remaining elements
-  */
+  // Add remaining elements
   return arr
     .concat(left.slice(leftIndex))
     .concat(right.slice(rightIndex));
 }
 
 function sort2(left, right) {
-  /*
-    Using indexes is faster than shifting arrays
-  */
+  // Using indexes is faster than shifting arrays
   let arr = [],
     leftIndex = 0,
     rightIndex = 0;
 
   while (leftIndex < left.length || rightIndex < right.length) {
-    /*
-      Checking for last elements can shave off 40% from execution time
-    */
+    // Checking for last elements can shave off 40% from execution time
     if (leftIndex === left.length) {
       arr.push(right[rightIndex]);
       rightIndex++;
@@ -57,33 +47,19 @@ function sort2(left, right) {
 }
 
 function mergeSort(array) {
-  /*
-    Search branch is done, return value
-  */
+  // Search branch is done, return value
   if (array.length <= 1) {
     return array;
   }
 
-  /*
-    Find the middle element
-    If the array length is even, select the first of the two middle elements by rounding
-    [📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦] 16 elements total, even length
-    📦📦📦📦📦📦📦[📦📦]📦📦📦📦📦📦📦 Two middle elements
-    📦📦📦📦📦📦📦[📦]📦📦📦📦📦📦📦📦 First middle element
-  */
+  // Find the middle element (rounded down)
   const middleIndex = Math.floor(array.length / 2);
 
-  /*
-    Split array into two halves
-    [📦📦📦📦📦📦📦📦] <- Left (includes middle element)
-           Right -> [📦📦📦📦📦📦📦📦]
-  */
+  // Split array into two halves
   const left = array.slice(0, middleIndex);
   const right = array.slice(middleIndex);
 
-  /*
-    Merge and sort array halves
-  */
+  // Merge and sort array halves
   return sort2(mergeSort(left), mergeSort(right));
 }
 
